@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express(); // <-- this line MUST come before using app
+require("dotenv").config();
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -8,7 +10,7 @@ app.use(express.json());
 
 // 🔐 Auth middleware
 app.use("/api", (req, res, next) => {
-  const userKey = req.header("api_key");
+  const userKey = req.header("api_key");  
   const serverKey = process.env.API_KEY;
 
   if (userKey && userKey === serverKey) {
